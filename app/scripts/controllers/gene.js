@@ -491,6 +491,7 @@ angular.module('oncokbApp')
             }
             var userNames = [];
             function getReviewInfo() {
+                console.log("Getting review info")
                 var sectionUUIDs_ = [];
                 var hasReviewContent_ = false;
                 var mutationChanged_ = false;
@@ -554,12 +555,15 @@ angular.module('oncokbApp')
                             mutationChanged: mutationChanged_
                         };
                     }
+                    console.log("Checking isChangedSection")
                     if (isChangedSection([mutation.mutation_effect.oncogenic_uuid, mutation.mutation_effect.effect_uuid, mutation.mutation_effect.description_uuid])) {
                         tempArr = [mutation.mutation_effect.oncogenic_review, mutation.mutation_effect.effect_review, mutation.mutation_effect.description_review];
                         sectionUUIDs_.push(mutation.mutation_effect_uuid);
                         ReviewResource.updated.push(mutation.mutation_effect_uuid);
                         mutationChanged = true;
                         setUpdatedSignature(tempArr, mutation.mutation_effect_uuid);
+                        console.log("isChangeSection: " + mutationChanged)
+                        console.log(sectionUUIDs_)
                     }
                     _.each(mutation.tumors, function (tumor) {
                         tumorSectionChanged = false;
@@ -706,6 +710,11 @@ angular.module('oncokbApp')
                     }
                     mutationChanged = false;
                 });
+                console.log({
+                    sectionUUIDs: sectionUUIDs_,
+                    hasReviewContent: hasReviewContent_,
+                    mutationChanged: mutationChanged_
+                })
                 return {
                     sectionUUIDs: sectionUUIDs_,
                     hasReviewContent: hasReviewContent_,
