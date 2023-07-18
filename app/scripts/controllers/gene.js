@@ -389,6 +389,7 @@ angular.module('oncokbApp')
                 if ($rootScope.reviewMode) {
                     $scope.exitReview();
                 } else {
+                    console.log("In review mode")
                     numOfReviewItems.clear();
                     var collaborators = $rootScope.collaborators;
                     var otherCollaborators = [];
@@ -723,6 +724,7 @@ angular.module('oncokbApp')
             }
 
             function prepareReviewItems() {
+                console.log("Preparing review items")
                 resetReviewResources();
                 var reviewInfo = getReviewInfo();
                 $scope.sectionUUIDs = reviewInfo.sectionUUIDs;
